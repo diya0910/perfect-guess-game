@@ -1,0 +1,43 @@
+import random
+def game():
+    print("A number between 1 and 100 has been chosen.")
+    randomNum = random.randint(1, 100)
+    userGuess = None
+    guesses = 0
+    while(userGuess != randomNum):
+        userGuess = int(input("Guess the number:\n")) 
+        if userGuess > 100 or userGuess < 0:
+            print("Invalid Guess!!!")
+        if userGuess == randomNum:
+            print("You guessed it right!!!")
+        elif userGuess > randomNum:
+            print("Guess a lower number please.")
+        elif userGuess < randomNum:
+            print("Guess a higher number please.")
+        guesses += 1
+        
+
+    print(f"The number was {randomNum}.")
+
+    if guesses == 1:
+        print(f"You took 1 guess only!!! AMAZING!!!")
+    elif guesses in range (2,6):
+        print(f"You took just {guesses} guesses!! GREAT!!")
+    elif guesses > 6:
+        print(f"You took {guesses} guesses! NOT BAD!")
+
+    with open("E:\VS_Code\Projects_Python\Text\highscore.txt", "r") as f:
+        highscore = int(f.read())
+
+    if(guesses<highscore):
+        print("You have just beaten the highscore!")
+        with open("E:\VS_Code\Projects_Python\Text\highscore.txt", "w") as f:
+            f.write(str(guesses))
+game()
+while True:
+    again = input("Play Again...?\nYes(Y) or No(N)...?\n")
+    again = again.lower()
+    if again == 'y':
+        game()
+    else:
+        exit()
